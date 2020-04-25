@@ -623,6 +623,12 @@ var initDataModel = function(){
 		}
 		writeSql(so)
 	}
+	ctrl.content_menu.expandNodeData = function(node_id){
+		console.log(node_id)
+		read_element(node_id, function(response){
+			console.log(ctrl.eMap[node_id])
+		})
+	}
 	ctrl.content_menu.pasteElementReference1 = function(el){
 		console.log(el, ctrl.content_menu.copyObject)
 		var so = {reference:ctrl.content_menu.copyObject.doc_id,

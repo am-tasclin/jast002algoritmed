@@ -36,7 +36,7 @@
 			title="вставка" class="w13-bar-item w3-button"><i
 			class="fa fa-paste"></i></a> {{ctrl.content_menu.subSepMenuName}}
 		<div class="w3-dropdown-content w3-card-4 w13-container w3-leftbar"
-			style="width: 190px"
+			style="width: 320px"
 			data-ng-if="ctrl.content_menu.subSepMenuName.indexOf(el.doc_id)>=0 && 
 							ctrl.content_menu.subSepMenuName.indexOf('paste_')==0
 							">
@@ -53,8 +53,11 @@
 					data-ng-click="ctrl.content_menu.pasteElementReference1(el)"
 					title="вставка - Посилання 1 на елемент">1 type <i
 					class="fas fa-share"></i>
-				</span> <span data-ng-if="el.reference"> {{' '+d.reference+' '}} <i
-					class="fas fa-eraser w3-btn" title="зтерти"
+				</span> <span data-ng-if="el.reference"> <span
+					data-ng-click="ctrl.content_menu.expandNodeData(d.reference)"
+					class="w3-hover-shadow"> {{' '+d.reference+' '}}
+						{{ctrl.eMap[d.reference].r1value}}:{{ctrl.eMap[d.reference].reference}}
+				</span> <i class="fas fa-eraser w3-btn" title="зтерти"
 					data-ng-click="ctrl.content_menu.deleteElementReference1(el)"></i>
 				</span>
 			</div>
@@ -63,7 +66,12 @@
 					data-ng-click="ctrl.content_menu.pasteElementReference2(el)"
 					title="вставка - Посилання 2 на елемент">2 value <i
 					class="fas fa-share"></i>
-				</span> <span data-ng-if="el.reference2"> {{'{'+d.reference2+'}'}} <i
+				</span> <span data-ng-if="el.reference2"> 
+				<span data-ng-click="ctrl.content_menu.expandNodeData(d.reference2)"
+					class="w3-hover-shadow"> {{'{'+d.reference2+'}'}}
+						{{ctrl.eMap[d.reference2].value_1_22}} <{{
+						ctrl.eMap[d.reference2].r1value }}
+						:{{ctrl.eMap[d.reference2].reference}} </span> <i
 					class="fas fa-eraser w3-btn" title="зтерти"
 					data-ng-click="ctrl.content_menu.deleteElementReference2(el)"></i>
 				</span>

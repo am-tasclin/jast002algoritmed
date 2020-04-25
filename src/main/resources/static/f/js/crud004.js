@@ -627,6 +627,7 @@ var initDataModel = function(){
 		console.log(node_id)
 		read_element(node_id, function(response){
 			console.log(ctrl.eMap[node_id])
+			ctrl.content_menu.copyObject = ctrl.eMap[node_id]
 		})
 	}
 	ctrl.content_menu.pasteElementReference1 = function(el){

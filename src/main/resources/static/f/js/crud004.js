@@ -1030,10 +1030,10 @@ var initSqlExe = function(){
 	}
 
 	ctrl.sql_exe.add2exe = function(doc_id){
-		if(!sql_app.exe.list2exe){
-			sql_app.exe.list2exe = {}
-		}
+		if(!sql_app.exe.list2exe) sql_app.exe.list2exe = {}
 		sql_app.exe.list2exe[doc_id] = doc_id
+		//ctrl.select_tree_item(ctrl.eMap[ctrl.doc2doc_ids[0]])
+		ctrl.eMap[ctrl.doc2doc_ids[0]].open_children = true
 	}
 
 }

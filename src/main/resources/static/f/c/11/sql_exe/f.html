@@ -36,18 +36,7 @@
 {{ctrl.sql_exe.read_sql}}
 </pre>
 	</div>
-	<div class="w3-responsive">
-		<table>
-			<thead class="w3-tiny w3-light-gray">
-				<tr>
-					<th data-ng-repeat="(k,v) in ctrl.sql_exe.readList[0]">{{k}}</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr data-ng-repeat="row in ctrl.sql_exe.readList">
-					<td data-ng-repeat="(k,v) in row">{{v}}</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
+	<div class="w3-responsive"
+		data-ng-repeat="tab in [ctrl.sql_exe.readList]"
+		data-ng-include="'/f/c/11/sql_exe/tab.html'"></div>
 </div>

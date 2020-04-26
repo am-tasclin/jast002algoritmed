@@ -137,7 +137,8 @@ function initConfig(){
 	ctrl.markdownInLine = function(text){
 		if (!text) return
 		var t2		= (''+text)
-		var bold	= /\u002A\u002A([\wа-яА-Яі\-]+\s*[\wа-яА-Яі\-]*)\u002A\u002A/gmi;
+		var bold	= /\u002A\u002A([\wа-яА-Яі\-]+[\s+[\wа-яА-Яі\-]*]*)\u002A\u002A/gmi;
+//		var bold	= /\u002A\u002A([\wа-яА-Яі\-]+\s*[\wа-яА-Яі\-]*)\u002A\u002A/gmi;
 		var t2		= t2.replace(bold, '<strong>$1</strong>');
 //		var bold = "\u002A\u002A([\wа-яА-Яі\-]+\s*[\wа-яА-Яі\-]*)\u002A\u002A";
 //		var t2 = (''+text).replace(new RegExp(bold, 'gi'), '<strong>$1</strong>');

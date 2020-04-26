@@ -699,10 +699,19 @@ var initDataModel = function(){
 var open_children_doc2doc = function(){
 	var fn_r_c = function(v){
 		var o = ctrl.eMap[v]
+		console.log(v)
 		if(371327 == o.reference2){//SQL
-			console.log(v, o.reference2)
 			ctrl.sql_exe.add2exe(v)
-			ctrl.sql_exe.read(v)
+			console.log(v, o.reference2, o)
+			if(!o.value_1_22 && o.reference){//SQL in reference?
+				if(!ctrl.eMap[o.reference]){
+					read_element(o.reference, function(response){
+						ctrl.sql_exe.read(o.reference)
+					})
+				}
+			}else{
+				ctrl.sql_exe.read(v)
+			}
 		}
 		read_element_children(v, function(response){ open_children_doc2doc() })
 	}
@@ -991,11 +1000,9 @@ var initSqlExe = function(){
 			ctrl.sql_exe.read_sql = d.value_1_22
 			ctrl.sql_exe.sql_id = sql_id
 		}
-//		console.log(ctrl.sql_exe.read_sql)
 		var sp_sql = ctrl.sql_exe.read_sql.replace(/\n/g,' ').split(':sql_')
 		if(sp_sql[1]){
 			var sql_id2 = sp_sql[1].split(' ')[0]
-			console.log(sql_id2)
 			var d2 = ctrl.eMap[sql_id2]
 			var fn2 = function(d2){
 				var sql2 = d2.value_1_22
@@ -1023,7 +1030,8 @@ var initSqlExe = function(){
 			readSql({ sql:ctrl.sql_exe.read_sql,
 				afterRead:function(response){ 
 					ctrl.sql_exe.readList = response.data.list
-					console.log(ctrl.sql_exe.readList)
+					console.log(sql_id, ctrl.sql_exe.readList)
+					ctrl.eMap[sql_id].readList = ctrl.sql_exe.readList
 				}
 			})
 		}
@@ -1033,7 +1041,8 @@ var initSqlExe = function(){
 		if(!sql_app.exe.list2exe) sql_app.exe.list2exe = {}
 		sql_app.exe.list2exe[doc_id] = doc_id
 		//ctrl.select_tree_item(ctrl.eMap[ctrl.doc2doc_ids[0]])
-		ctrl.eMap[ctrl.doc2doc_ids[0]].open_children = true
+		if(ctrl.eMap[ctrl.doc2doc_ids[0]])
+			ctrl.eMap[ctrl.doc2doc_ids[0]].open_children = true
 	}
 
 }

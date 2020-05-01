@@ -1,6 +1,5 @@
 <div data-ng-repeat="e in el.children" data-ng-switch="e.reference">
 	<div data-ng-if="371327==e.reference2">
-		{{e.doc_id}} {{e.reference}}
 		<div class="w3-responsive"
 			data-ng-repeat="tab in [ctrl.eMap[e.reference].readList]"
 			data-ng-include="'/f/c/11/sql_exe/tab.html'"></div>

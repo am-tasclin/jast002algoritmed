@@ -24,7 +24,9 @@
 			<span data-ng-repeat="cnf in [{show_title:'no'}]"
 				data-ng-include="'/f/home-link.html'" class="w3-small0 am-b"></span> <a href="#" data-ng-click="ctrl.reload_page()"> <span
 				class="am-b w3-small"> {{ctrl.page_title}} </span>
-			</a> <i class="fas fa-sliders-h"></i>
+			</a> <i class="fas fa-sliders-h w3-hover-shadow"
+			data-ng-click="ctrl.change_panel()"
+			></i>
 		</div>
 		<div class="w3-row">
 			<div class="w3-half w3-border-right">

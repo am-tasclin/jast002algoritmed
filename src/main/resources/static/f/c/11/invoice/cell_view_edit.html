@@ -1,6 +1,9 @@
 <div>
 	<div data-ng-repeat="cell in [ctrl.eMap[row.ref_to_col[col.doc_id]]]">
-		<span data-ng-class="{'w3-tiny':row.rowOpenToEdit}"
+		<span data-ng-if="col.reference2"> 
+		{{cell.r2value}}
+		 </span> <span
+			data-ng-class="{'w3-tiny':row.rowOpenToEdit}"
 			data-ng-switch="col.doctype"> <span data-ng-switch-default>
 				{{cell['value_1_'+cell.doctype_r]}} </span> <span data-ng-switch-when="32">
 				{{cell.r2value}} </span> <span data-ng-switch-when="26">

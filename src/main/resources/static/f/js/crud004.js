@@ -697,6 +697,11 @@ var initDataModel = function(){
 }
 
 var open_children_doc2doc = function(){
+	ctrl.change_panel = function(){
+		ctrl.doc2doc_ids.unshift(ctrl.doc2doc_ids[1])
+		ctrl.doc2doc_ids.splice(2, 1)
+		console.log(ctrl.doc2doc_ids)
+	}
 	var fn_r_c = function(v){
 		var o = ctrl.eMap[v]
 		console.log(v)

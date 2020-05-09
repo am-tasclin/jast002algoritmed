@@ -7,6 +7,13 @@ app.controller('AppCtrl', function($scope, $http, $timeout) {
 	ctrl.views_template_list = [368797,369967,369984,369988,371294,371306]
 
 	open_children_doc2doc()
+	
+	exe_fn.add_eMap = function(v){
+		if(v.doc_id==ctrl.doc2doc_ids[1] && ctrl.request.parameters.mode=='view_doc'){
+			console.log(v.doc_id)
+			v.open_children = true
+		}
+	}
 
 })
 /*

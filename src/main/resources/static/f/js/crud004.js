@@ -12,6 +12,11 @@ var initCrud004 = function() {
 	initWiki()
 }
 
+var add_eMap = function(v){
+	ctrl.eMap[v.doc_id] = v
+	if(exe_fn.add_eMap) exe_fn.add_eMap(v)
+}
+
 var initDataModel = function(){
 	ctrl.content_menu = {}
 
@@ -34,7 +39,7 @@ var initDataModel = function(){
 							set_ref_to_col(v,parentEl)
 							if(!parentEl.children) parentEl.children = []
 							parentEl.children.push(v)
-							ctrl.eMap[v.doc_id] = v
+							add_eMap(v)
 						})
 					})
 				})
@@ -704,7 +709,6 @@ var open_children_doc2doc = function(){
 	}
 	var fn_r_c = function(v){
 		var o = ctrl.eMap[v]
-		console.log(v)
 		if(371327 == o.reference2){//SQL
 			ctrl.sql_exe.add2exe(v)
 			console.log(v, o.reference2, o)
@@ -731,9 +735,9 @@ var open_children_doc2doc = function(){
 }
 
 var read_to_folder = function(d, d_start_id, doc){
-	var sql = sql_app.SELECT_obj_with_i18n(d.doc_id)
-	readSql({ sql:sql,
-		afterRead:function(response){
+	if(true || !ctrl.eMap[d_start_id]){//TODO: пропадає іконка закрити робочу праву панель
+		var sql = sql_app.SELECT_obj_with_i18n(d.doc_id)
+		readSql({ sql:sql, afterRead:function(response){
 			var d_r = response.data.list[0]
 //console.log(d.doc_id, d_r)
 			if(14==d_r.doctype){//folder
@@ -742,13 +746,14 @@ var read_to_folder = function(d, d_start_id, doc){
 					ctrl.doc2doc_fd[d_start_id] = doc
 				}
 			}else
-			if(17==d_r.doctype){//document
-				read_to_folder({doc_id:d_r.parent}, d_start_id, d_r)
-			}else{
-				read_to_folder({doc_id:d_r.parent}, d_start_id)
-			}
-		}
-	})
+				if(17==d_r.doctype){//document
+					read_to_folder({doc_id:d_r.parent}, d_start_id, d_r)
+				}else{
+					read_to_folder({doc_id:d_r.parent}, d_start_id)
+				}
+//			console.log(d_start_id,'TODO: double read')
+		}})
+	}
 }
 
 function readSql(params, obj){
@@ -834,7 +839,8 @@ function read_element(doc_id, fn){
 		var fn0 = function(response){
 //		console.log(response.data)
 			var o = response.data.list[0]
-			ctrl.eMap[o.doc_id] = o
+			//ctrl.eMap[o.doc_id] = o
+			add_eMap(o)
 			if(ctrl.eMap[o.parent]){
 				if(!ctrl.eMap[o.parent].children){
 					ctrl.eMap[o.parent].children = [o]

@@ -28,13 +28,13 @@
 			data-ng-click="ctrl.change_panel()"
 			></i>
 		</div>
-		a1
 		<div data-ng-if="ctrl.eMap[ctrl.doc2doc_ids[1]].open_children">
-		a2
-			<div class="w3-tiny w3-right">
-				<span data-ng-repeat="ddEl in [ctrl.eMap[ctrl.doc2doc_ids[1]]]"
-					data-ng-include="'/f/c/11/mc_window_icon.html'"></span>
+			<div class="w3-tiny w3-right"
+				data-ng-repeat="ddEl in [ctrl.eMap[ctrl.doc2doc_ids[1]]]">
+				<span data-ng-include="'/f/c/11/mc_window_icon.html'"></span> <span
+					data-ng-include="'/f/c/11/mc_panel_icon.html'"></span>
 			</div>
+			<div data-ng-include="'/f/c/11/invoice/invoice002.html'"></div>
 			<div data-ng-include="'/f/c/11/sql_exe/f.html'"></div>
 			<div data-ng-if="369940==ctrl.eMap[ctrl.doc2doc_ids[1]].reference"
 				data-ng-include="'/f/c/11/wiki/f.html'"></div>

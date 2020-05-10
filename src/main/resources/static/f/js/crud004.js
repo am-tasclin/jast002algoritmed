@@ -677,7 +677,7 @@ var initDataModel = function(){
 	}
 
 	ctrl.select_tree_item = function(d){
-		if(d.doc_id==ctrl.doc2doc_ids[1]){
+		if(false&&d.doc_id==ctrl.doc2doc_ids[1]){
 			alert('Дані вже відкртиті в правій панелі.')
 			return
 		}

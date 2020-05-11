@@ -1010,6 +1010,7 @@ var initSqlExe = function($timeout){
 		ctrl.sql_exe.read(sql_id)
 		ctrl.sql_exe.show_seek_list = !ctrl.sql_exe.show_seek_list 
 	}
+
 	ctrl.sql_exe.read_seek_list = function(){
 		ctrl.sql_exe.show_seek_list = !ctrl.sql_exe.show_seek_list 
 		var o = ctrl.eMap[ctrl.eMap[ctrl.sql_exe.sql_id].ref_to_col[371682]]

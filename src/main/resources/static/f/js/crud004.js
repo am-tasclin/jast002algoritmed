@@ -1001,12 +1001,23 @@ var initSqlExe = function($timeout){
 	ctrl.sql_exe.show_sql_type='value_1_22'
 	sql_app.exe.limit = 15
 
+	ctrl.sql_exe.set_sql_seek = function(itemEl){
+		var o = ctrl.eMap[ctrl.eMap[ctrl.sql_exe.sql_id].ref_to_col[371682]]
+		console.log(itemEl, o.r2value)
+		o.r2value = itemEl.value_1_22
+		var sql_id = ctrl.sql_exe.sql_id
+		ctrl.sql_exe.sql_id = 0
+		ctrl.sql_exe.read(sql_id)
+		ctrl.sql_exe.show_seek_list = !ctrl.sql_exe.show_seek_list 
+	}
+	ctrl.sql_exe.read_seek_list = function(){
+		ctrl.sql_exe.show_seek_list = !ctrl.sql_exe.show_seek_list 
+		var o = ctrl.eMap[ctrl.eMap[ctrl.sql_exe.sql_id].ref_to_col[371682]]
+	}
 	var _timeout_seek_fn
 	ctrl.sql_exe.change_sql_seek = function(){
-		console.log(ctrl.eMap[ctrl.eMap[ctrl.sql_exe.sql_id].ref_to_col[371682]].r2value, _timeout_seek_fn)
 		if(_timeout_seek_fn) $timeout.cancel(_timeout_seek_fn)
 		_timeout_seek_fn = $timeout(function() {
-			console.log('старт пошук', ctrl.eMap[ctrl.eMap[ctrl.sql_exe.sql_id].ref_to_col[371682]].r2value)
 			var sql_id = ctrl.sql_exe.sql_id
 			ctrl.sql_exe.sql_id = 0
 			ctrl.sql_exe.read(sql_id)
@@ -1037,7 +1048,6 @@ var initSqlExe = function($timeout){
 				var sql_id2 = d2.doc_id
 				if(371682==d2.reference){// seek.like_all 
 					sql2 = "'%" + d2.r2value + "%'" 
-					console.log(sql2, d2.r2value, d2)
 				}else{
 				}
 				ctrl.sql_exe.read_sql = ctrl.sql_exe.read_sql.replace(':sql_'+sql_id2, sql2)
@@ -1060,7 +1070,6 @@ var initSqlExe = function($timeout){
 		}else{
 			ctrl.sql_exe.read_sql += " LIMIT " + sql_app.exe.limit
 			delete ctrl.sql_exe.readList
-			console.log(ctrl.sql_exe.read_sql)
 			readSql({ sql:ctrl.sql_exe.read_sql,
 				afterRead:function(response){ 
 					ctrl.sql_exe.readList = response.data.list

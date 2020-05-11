@@ -25,6 +25,19 @@
 		<i class="fas fa-search"></i> <input class="w3-border "
 			data-ng-change="ctrl.sql_exe.change_sql_seek()"
 			data-ng-model="ctrl.eMap[ctrl.eMap[ctrl.sql_exe.sql_id].ref_to_col[371682]].r2value">
+		<div class="w3-dropdown-click">
+			<span data-ng-click="ctrl.sql_exe.read_seek_list()"> <i
+				class="fas fa-list"></i>
+				{{ctrl.eMap[ctrl.eMap[ctrl.sql_exe.sql_id].ref_to_col[371682]].r2value}}
+			</span>
+			<div class="w3-dropdown-content w3-bar-block w3-border"
+				data-ng-class="{'w3-show':ctrl.sql_exe.show_seek_list}">
+				<a href="#" class="w3-bar-item w3-button"
+					data-ng-click="ctrl.sql_exe.set_sql_seek(itemEl)"
+					data-ng-repeat="itemEl in ctrl.eMap[ctrl.eMap[ctrl.sql_exe.sql_id].ref_to_col[371682]].children">
+					{{itemEl.value_1_22}} </a>
+			</div>
+		</div>
 	</div>
 	<div class="w3-tiny w3-responsive"
 		data-ng-if="!ctrl.sql_exe.notShow_sql">

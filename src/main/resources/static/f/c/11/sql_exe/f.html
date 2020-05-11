@@ -20,14 +20,19 @@
 		<i class="fas fa-terminal"></i>:
 		{{ctrl.eMap[ctrl.eMap[ctrl.sql_exe.sql_id].ref_to_col[371335]].value_1_22}}
 	</div>
+	<div class=""
+		data-ng-if="ctrl.eMap[ctrl.sql_exe.sql_id].ref_to_col[371682]">
+		<i class="fas fa-search"></i> <input class="w3-border "
+			data-ng-change="ctrl.sql_exe.change_sql_seek()"
+			data-ng-model="ctrl.eMap[ctrl.eMap[ctrl.sql_exe.sql_id].ref_to_col[371682]].r2value">
+	</div>
 	<div class="w3-tiny w3-responsive"
 		data-ng-if="!ctrl.sql_exe.notShow_sql">
 		<div data-ng-if="ctrl.sql_exe.show_sql_type=='value_1_22'">
 			<pre>
-<span data-ng-repeat="v in ctrl.eMap[ctrl.sql_exe.sql_id].value_1_22.split(':sql_')"><a
-	data-ng-if="$index>0" href="#"
-	data-ng-click="ctrl.sql_exe.add2exe(v.split(' ')[0]);ctrl.sql_exe.read(v.split(' ')[0])"
-	>:sql_{{v.split(' ')[0]}}:<b>{{
+<span				data-ng-repeat="v in ctrl.eMap[ctrl.sql_exe.sql_id].value_1_22.split(':sql_')"><a
+					data-ng-if="$index>0" href="#"
+					data-ng-click="ctrl.sql_exe.add2exe(v.split(' ')[0]);ctrl.sql_exe.read(v.split(' ')[0])">:sql_{{v.split(' ')[0]}}:<b>{{
 	ctrl.eMap[ctrl.eMap[v.split(' ')[0]].ref_to_col[371335]].value_1_22}}</b></a>{{$index>0?v.replace(v.split(' ')[0],''):v}}</span>
 </pre>
 		</div>
@@ -38,8 +43,8 @@
 	</div>
 	<div class="w3-responsive"
 		data-ng-repeat="tab in [ctrl.sql_exe.readList]"
-		data-ng-include="'/r/html/371565'"></div>
-		<!-- 
 		data-ng-include="'/f/c/11/sql_exe/tab.html'"></div>
+		<!-- 
+		data-ng-include="'/r/html/371565'"></div>
 		 -->
 </div>

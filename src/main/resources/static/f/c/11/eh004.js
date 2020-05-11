@@ -2,7 +2,7 @@ app.controller('AppCtrl', function($scope, $http, $timeout) {
 	ctrl = this
 	initApp($scope, $http, $timeout)
 	random_newValue('edProtocol','value2')
-	initCrud004()
+	initCrud004($timeout)
 	ctrl.page_title = 'mc:' + ctrl.request.parameters.doc2doc
 	ctrl.views_template_list = [368797,369967,369984,369988,371294,371306]
 

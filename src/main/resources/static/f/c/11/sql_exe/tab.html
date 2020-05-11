@@ -6,7 +6,10 @@
 	</thead>
 	<tbody>
 		<tr data-ng-repeat="row in tab">
-			<td data-ng-repeat="(k,v) in row">{{v}}</td>
+			<td data-ng-repeat="(k,v) in row"
+				ng-bind-html="ctrl.highlight(v
+				, ctrl.eMap[ctrl.eMap[ctrl.sql_exe.sql_id].ref_to_col[371682]].r2value)"
+			>{{v}}</td>
 		</tr>
 	</tbody>
 </table>

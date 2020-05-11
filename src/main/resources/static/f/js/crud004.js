@@ -1,4 +1,4 @@
-var initCrud004 = function() {
+var initCrud004 = function($timeout) {
 	if(ctrl.request.parameters.doc2doc){
 		ctrl.doc2doc_ids = []
 		angular.forEach(ctrl.request.parameters.doc2doc.split(','), function(v,k){
@@ -8,7 +8,7 @@ var initCrud004 = function() {
 		console.log(ctrl.doc2doc_ids)
 	}
 	initDataModel()
-	initSqlExe()
+	initSqlExe($timeout)
 	initWiki()
 }
 
@@ -995,13 +995,25 @@ var initWiki = function(){
 	}
 }
 
-var initSqlExe = function(){
+var initSqlExe = function($timeout){
 	sql_app.exe = {}
 	ctrl.sql_exe = sql_app.exe
 	ctrl.sql_exe.show_sql_type='value_1_22'
 	sql_app.exe.limit = 15
 
+	var _timeout_seek_fn
+	ctrl.sql_exe.change_sql_seek = function(){
+		console.log(ctrl.eMap[ctrl.eMap[ctrl.sql_exe.sql_id].ref_to_col[371682]].r2value, _timeout_seek_fn)
+		if(_timeout_seek_fn) $timeout.cancel(_timeout_seek_fn)
+		_timeout_seek_fn = $timeout(function() {
+			console.log('старт пошук', ctrl.eMap[ctrl.eMap[ctrl.sql_exe.sql_id].ref_to_col[371682]].r2value)
+			var sql_id = ctrl.sql_exe.sql_id
+			ctrl.sql_exe.sql_id = 0
+			ctrl.sql_exe.read(sql_id)
+		}, 1000)
+	}
 	ctrl.sql_exe.read = function(sql_id){
+//		console.log(sql_id)
 		var d = ctrl.eMap[sql_id]
 		if(d.cnt_child>0 && !d.children){
 			read_element_children(sql_id)
@@ -1015,13 +1027,20 @@ var initSqlExe = function(){
 			ctrl.sql_exe.sql_id = sql_id
 		}
 		var sp_sql = ctrl.sql_exe.read_sql.replace(/\n/g,' ').split(':sql_')
+//		console.log(sql_id, sp_sql[1])
 		if(sp_sql[1]){
 			var sql_id2 = sp_sql[1].split(' ')[0]
 			var d2 = ctrl.eMap[sql_id2]
+			//console.log(sql_id, sql_id2, d2)
 			var fn2 = function(d2){
 				var sql2 = d2.value_1_22
 				var sql_id2 = d2.doc_id
-				ctrl.sql_exe.read_sql =	ctrl.sql_exe.read_sql.replace(':sql_'+sql_id2, sql2)
+				if(371682==d2.reference){// seek.like_all 
+					sql2 = "'%" + d2.r2value + "%'" 
+					console.log(sql2, d2.r2value, d2)
+				}else{
+				}
+				ctrl.sql_exe.read_sql = ctrl.sql_exe.read_sql.replace(':sql_'+sql_id2, sql2)
 				d.sql_inner.push(sql_id2)
 				if(d.value_1_22.indexOf(sql_id2)>=0){
 					d.sql_inner1.push(sql_id2)
@@ -1032,19 +1051,19 @@ var initSqlExe = function(){
 			if(!d2){
 				read_element(sql_id2, function(response){
 					var d2 = ctrl.eMap[sql_id2]
+					//console.log(sql_id, sql_id2, d2)
 					fn2(d2)
 				})
 			}else{
 				fn2(d2)
 			}
 		}else{
-			console.log(2)
 			ctrl.sql_exe.read_sql += " LIMIT " + sql_app.exe.limit
 			delete ctrl.sql_exe.readList
+			console.log(ctrl.sql_exe.read_sql)
 			readSql({ sql:ctrl.sql_exe.read_sql,
 				afterRead:function(response){ 
 					ctrl.sql_exe.readList = response.data.list
-					console.log(sql_id, ctrl.sql_exe.readList)
 					ctrl.eMap[sql_id].readList = ctrl.sql_exe.readList
 				}
 			})

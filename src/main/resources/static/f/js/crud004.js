@@ -711,14 +711,15 @@ var open_children_doc2doc = function(){
 		console.log(ctrl.doc2doc_ids)
 	}
 	var fn_r_c = function(v){
+			console.log(v)
 		var o = ctrl.eMap[v]
-		if(371327 == o.reference2){//SQL
+		if(371327 == o.reference){//SQL
 			ctrl.sql_exe.add2exe(v)
-			console.log(v, o.reference2, o)
+			console.log(v, o.reference, o.reference2, o)
 			if(!o.value_1_22 && o.reference){//SQL in reference?
 				if(!ctrl.eMap[o.reference]){
-					read_element(o.reference, function(response){
-						ctrl.sql_exe.read(o.reference)
+					read_element(o.reference2, function(response){
+						ctrl.sql_exe.read(o.reference2)
 					})
 				}
 			}else{
@@ -730,6 +731,7 @@ var open_children_doc2doc = function(){
 	angular.forEach(restReadChildrenIds.slice(), function(v,k){
 		restReadChildrenIds.splice(restReadChildrenIds.indexOf(v),1)
 		if(!ctrl.eMap[v]){
+			console.log(v, restReadChildrenIds)
 			read_element(v, function(response){ fn_r_c(v) })
 		}else if(!ctrl.eMap[v].children){
 			fn_r_c(v)

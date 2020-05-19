@@ -998,6 +998,23 @@ var initWiki = function(){
 }
 
 var initSqlExe = function($timeout){
+	
+	ctrl.request.changeView = function(p){
+		if(!ctrl.request.parameters.views) ctrl.request.parameters.views = ''
+		var v = ctrl.request.parameters.views.split(',')
+		console.log(p,v.toString(), v.indexOf(p))
+		if(v.indexOf(p)>=0){
+			v.splice(v.indexOf(p),1)
+			ctrl.request.parameters.views = v.toString()
+		}else{
+			ctrl.request.parameters.views = v.toString()
+			if(ctrl.request.parameters.views.length > 0)
+				ctrl.request.parameters.views += ','
+			ctrl.request.parameters.views += p
+		}
+		console.log(ctrl.request.parameters.views)
+	}
+
 	sql_app.exe = {}
 	ctrl.sql_exe = sql_app.exe
 	ctrl.sql_exe.show_sql_type='value_1_22'

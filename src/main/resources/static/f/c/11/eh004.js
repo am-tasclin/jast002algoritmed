@@ -9,8 +9,7 @@ app.controller('AppCtrl', function($scope, $http, $timeout) {
 	open_children_doc2doc()
 	
 	exe_fn.add_eMap = function(v){
-		if(v.doc_id==ctrl.doc2doc_ids[1] && ctrl.request.parameters.mode=='view_doc'){
-			console.log(v.doc_id)
+		if(v.doc_id==ctrl.doc2doc_ids[1] && ctrl.request.parameters.views && ctrl.request.parameters.views.indexOf('doc')>=0){
 			v.open_children = true
 		}
 	}

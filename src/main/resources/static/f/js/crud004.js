@@ -998,7 +998,7 @@ var initWiki = function(){
 }
 
 var initSqlExe = function($timeout){
-	
+
 	ctrl.request.changeView = function(p){
 		if(!ctrl.request.parameters.views) ctrl.request.parameters.views = ''
 		var v = ctrl.request.parameters.views.split(',')
@@ -1034,6 +1034,7 @@ var initSqlExe = function($timeout){
 		ctrl.sql_exe.show_seek_list = !ctrl.sql_exe.show_seek_list 
 		var o = ctrl.eMap[ctrl.eMap[ctrl.sql_exe.sql_id].ref_to_col[371682]]
 	}
+
 	var _timeout_seek_fn
 	ctrl.sql_exe.change_sql_seek = function(){
 		if(_timeout_seek_fn) $timeout.cancel(_timeout_seek_fn)

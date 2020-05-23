@@ -4,11 +4,17 @@ app.controller('AppCtrl', function($scope, $http, $timeout) {
 	random_newValue('edProtocol','value2')
 	initCrud004($timeout)
 	ctrl.page_title = 'mc:' + ctrl.request.parameters.doc2doc
-	ctrl.views_template_list = [368797,369967,369984,369988,371294,371306,371704,371562]
+	ctrl.views_template_list = [368797,369967,369984,369988,371294,371306]
+//	ctrl.views_template_list = [368797,369967,369984,369988,371294,371306,371704,371562]
 
 	open_children_doc2doc()
 	
 	exe_fn.add_eMap = function(v){
+		if( 371705 ==v.reference){// view_sql_ua_001
+			if(ctrl.views_template_list.indexOf(v.reference2)<0){
+				ctrl.views_template_list.push(v.reference2)
+			}
+		}
 		if(v.doc_id==ctrl.doc2doc_ids[1] && ctrl.request.parameters.views && ctrl.request.parameters.views.indexOf('doc')>=0){
 			v.open_children = true
 		}

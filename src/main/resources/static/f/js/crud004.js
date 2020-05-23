@@ -829,6 +829,7 @@ function read_element_children(doc_id, fn){
 					}
 					if(fn && typeof fn === 'object' && fn.forEachOne)	fn.forEachOne(v,response)
 					if(fn && fn.fn  && fn.fn.forEachOne)	fn.fn.forEachOne(v,response)
+					if(exe_fn.add_eMap) exe_fn.add_eMap(v)
 				})
 				if(fn && typeof fn === 'function')		fn(response)
 			}
@@ -1018,7 +1019,7 @@ var initSqlExe = function($timeout){
 	sql_app.exe = {}
 	ctrl.sql_exe = sql_app.exe
 	ctrl.sql_exe.show_sql_type='value_1_22'
-	sql_app.exe.limit = 15
+	sql_app.exe.limit = 25
 
 	ctrl.sql_exe.set_sql_seek = function(itemEl){
 		var o = ctrl.eMap[ctrl.eMap[ctrl.sql_exe.sql_id].ref_to_col[371682]]

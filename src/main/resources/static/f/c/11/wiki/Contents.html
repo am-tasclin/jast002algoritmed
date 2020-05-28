@@ -4,6 +4,11 @@
 	<ol data-ng-if="!ctrl.wiki.closeContents">
 		<li data-ng-repeat="e in el.children" data-ng-if="371364==e.reference">
 			<a href="#_{{e.doc_id}}"> {{e.value_1_22}} </a>
+		<ol data-ng-if="ctrl.eMap[e.doc_id].ref_to_col[371363]">
+				<li data-ng-repeat="h3 in e.children"
+					data-ng-if="371363==h3.reference"><a href="#_{{h3.doc_id}}">
+						{{h3.value_1_22}} </a></li>
+			</ol>
 		</li>
 	</ol>
 </div>

@@ -767,6 +767,7 @@ function readSql(params, obj){
 	if(!params.error_fn)
 		params.error_fn = function(response){
 			console.error(response)
+			console.error(params)
 			console.error(response.config.params.sql)
 		}
 	if(!obj) obj = params
@@ -1046,8 +1047,8 @@ var initSqlExe = function($timeout){
 		}, 1000)
 	}
 	ctrl.sql_exe.read = function(sql_id){
-//		console.log(sql_id)
 		var d = ctrl.eMap[sql_id]
+		console.log(sql_id, d.doc_id)
 		if(d.cnt_child>0 && !d.children){
 			read_element_children(sql_id)
 		}
@@ -1059,6 +1060,7 @@ var initSqlExe = function($timeout){
 			ctrl.sql_exe.read_sql = d.value_1_22
 			ctrl.sql_exe.sql_id = sql_id
 		}
+		console.log(ctrl.sql_exe.read_sql)
 		var sp_sql = ctrl.sql_exe.read_sql.replace(/\n/g,' ').split(':sql_')
 //		console.log(sql_id, sp_sql[1])
 		if(sp_sql[1]){
@@ -1090,7 +1092,8 @@ var initSqlExe = function($timeout){
 				fn2(d2)
 			}
 		}else{
-			ctrl.sql_exe.read_sql += " LIMIT " + sql_app.exe.limit
+			if(ctrl.sql_exe.read_sql.indexOf('LIMIT')<0)
+				ctrl.sql_exe.read_sql += " LIMIT " + sql_app.exe.limit
 			delete ctrl.sql_exe.readList
 			readSql({ sql:ctrl.sql_exe.read_sql,
 				afterRead:function(response){ 

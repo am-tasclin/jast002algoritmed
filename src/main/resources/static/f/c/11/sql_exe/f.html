@@ -18,8 +18,7 @@
 		</span>
 	</div>
 	<div
-	data-ng-if="ctrl.request.parameters.views.indexOf('sqloff')<0"
-	>
+		data-ng-if="!ctrl.request.parameters.views || ctrl.request.parameters.views.indexOf('sqloff')<0">
 		<div
 			class="w3-tiny w3-border-bottom am-b w3-hover-shadow w3-light-gray"
 			data-ng-click="ctrl.sql_exe.notShow_sql=!ctrl.sql_exe.notShow_sql">

@@ -1,7 +1,8 @@
 <div data-ng-repeat="e in el.children" data-ng-switch="e.reference">
 	<div data-ng-if="371799==e.reference">
-	ed 
-	a1
+	edit: {{e.r2value}} {{e.reference2}}
+		<div data-ng-if="ctrl.views_template_list.indexOf(e.reference2)>=0"
+			data-ng-include="'/f/c/11/ed/'+e.reference2+'/edit_sql_001.html'"></div>
 	</div>
 	<div data-ng-if="371705==e.reference">
 		<div data-ng-if="ctrl.views_template_list.indexOf(e.reference2)>=0"

@@ -10,7 +10,7 @@ app.controller('AppCtrl', function($scope, $http, $timeout) {
 	open_children_doc2doc()
 	
 	exe_fn.add_eMap = function(v){
-		if( 371705 ==v.reference){// view_sql_ua_001
+		if( [371705,371799].indexOf(v.reference)>=0 ){// view_sql_ua_001, edit_sql_001
 			if(ctrl.views_template_list.indexOf(v.reference2)<0){
 				ctrl.views_template_list.push(v.reference2)
 			}

@@ -10,6 +10,8 @@ var initCrud004 = function($timeout) {
 	initDataModel()
 	initSqlExe($timeout)
 	initWiki()
+	initEditObjectForm()
+
 }
 
 var add_eMap = function(v){
@@ -991,6 +993,13 @@ sql_app.SELECT_doc_id = function(){
 	return sql
 }
 
+var initEditObjectForm = function(){
+	
+	ctrl.initObjectForm = function(e){
+		console.log(e)
+	}
+}
+
 var initWiki = function(){
 	console.log('wiki')
 	ctrl.wiki = {}
@@ -1048,7 +1057,7 @@ var initSqlExe = function($timeout){
 	}
 	ctrl.sql_exe.read = function(sql_id){
 		var d = ctrl.eMap[sql_id]
-		console.log(sql_id, d.doc_id)
+		//console.log(sql_id, d.doc_id)
 		if(d.cnt_child>0 && !d.children){
 			read_element_children(sql_id)
 		}
@@ -1060,7 +1069,7 @@ var initSqlExe = function($timeout){
 			ctrl.sql_exe.read_sql = d.value_1_22
 			ctrl.sql_exe.sql_id = sql_id
 		}
-		console.log(ctrl.sql_exe.read_sql)
+		//console.log(ctrl.sql_exe.read_sql)
 		var sp_sql = ctrl.sql_exe.read_sql.replace(/\n/g,' ').split(':sql_')
 //		console.log(sql_id, sp_sql[1])
 		if(sp_sql[1]){

@@ -993,11 +993,25 @@ sql_app.SELECT_doc_id = function(){
 	return sql
 }
 
+var initEditTiming = function(){
+
+	ctrl.edTiming = {}
+	ctrl.edTiming.doc_id		= 368797
+	ctrl.edTiming.frequency_id	= 369936
+	ctrl.edTiming.period_id		= 368861
+
+	console.log(ctrl.edTiming)
+}
+
 var initEditObjectForm = function(){
-	
+
 	ctrl.initObjectForm = function(e){
-		console.log(e)
+		console.log(e, e.reference2)
+		if(368797==e.reference2 && !ctrl.edTiming){
+			initEditTiming()
+		}
 	}
+
 }
 
 var initWiki = function(){

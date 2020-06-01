@@ -1001,6 +1001,17 @@ var initEditTiming = function(){
 	ctrl.edTiming.period_id		= 368861
 
 	console.log(ctrl.edTiming)
+
+	ctrl.edTiming.clickClean = function() {
+		delete ctrl.edTiming.timing_id
+		delete ctrl.edTiming.e
+	}
+	ctrl.edTiming.clickSaved = function(e) {
+		ctrl.edTiming.timing_id=e.doc_id
+		ctrl.edTiming.e=e
+		console.log(e, ctrl.edTiming)
+	}
+
 }
 
 var initEditObjectForm = function(){

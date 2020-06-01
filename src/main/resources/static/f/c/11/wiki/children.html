@@ -8,9 +8,10 @@
 		<!-- view_sql_ua_001 == 371705 -->
 		a1
 		{{e.doc_id}}
-		{{ctrl.eMap[e.reference2].reference}}
 		<div data-ng-if="ctrl.views_template_list.indexOf(e.reference2)>=0"
 			data-ng-include="'/f/c/11/wiki/view_sql_ua_001/'+e.reference2+'/v.html'"></div>
+		<div data-ng-if="ctrl.views_template_list.indexOf(ctrl.eMap[e.reference2].reference)>=0"
+			data-ng-include="'/f/c/11/wiki/view_sql_ua_001/'+ctrl.eMap[e.reference2].reference+'/v.html'"></div>
 	</div>
 	<div
 		data-ng-if="371327==e.reference && 371705!=ctrl.eMap[e.parent].reference">
@@ -34,9 +35,11 @@
 	</h2>
 	<h3 data-ng-switch-when="371363" class="am-b">{{e.value_1_22}}</h3>
 	<ol data-ng-switch-when="371367">
-		<li data-ng-repeat="li in e.children">
+		<li data-ng-repeat="li in e.children"
+			data-ng-bind-html="ctrl.markdownInLine(li.value_1_22)"></li>
+		<!-- 
 			<div data-ng-bind-html="ctrl.markdownInLine(li.value_1_22)"></div>
-		</li>
+		 -->
 	</ol>
 	<div data-ng-if="e.children && 371367!=e.reference" data-ng-init="el=e"
 		data-ng-include="'/f/c/11/wiki/children.html'"></div>

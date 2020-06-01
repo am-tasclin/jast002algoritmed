@@ -1,12 +1,28 @@
 <div class="w3-border">
-	<div class="w3-hover-shadow" data-ng-click="ctrl.initObjectForm(e)">edit: {{e.r2value}}
-		{{e.reference2}}</div>
-	<div class="w3-hover-shadow">
-		<span class="w3-tiny am-b"> Частота </span>
-		<div>раз. в</div>
-	</div>
-	<div class="w3-hover-shadow">
-		<span class="w3-tiny am-b"> Період </span>
-		<div>кожні</div>
+	<div class="w3-hover-shadow" data-ng-click="ctrl.initObjectForm(e)">edit:
+		{{e.r2value}} {{e.reference2}}</div>
+	<div class="w3-row">
+		<div class="w3-third">
+			<div class="w3-hover-shadow">
+				<span class="w3-tiny am-b"> Частота </span>
+				<div>раз. в</div>
+			</div>
+			<div class="w3-hover-shadow">
+				<span class="w3-tiny am-b"> Період </span>
+				<div>кожні</div>
+			</div>
+		</div>
+		<div class="w3-third">
+			<div class="w3-tiny am-b">Одиниці часу</div>
+			<div data-ng-repeat="e in [ctrl.eMap[371813]]">
+				<div
+					data-ng-if="ctrl.views_template_list.indexOf(ctrl.eMap[e.reference2].reference)>=0"
+					data-ng-include="'/f/c/11/wiki/view_sql_ua_001/'+ctrl.eMap[e.reference2].reference+'/v.html'"></div>
+			</div>
+		</div>
+		<div class="w3-third">
+			<i class="w3-btn fas fa-asterisk w3-right"></i> <input
+				style="width: 65%" class="w3-border">
+		</div>
 	</div>
 </div>

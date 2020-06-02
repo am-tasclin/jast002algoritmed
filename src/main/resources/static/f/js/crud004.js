@@ -1005,9 +1005,11 @@ var initEditTiming = function(){
 	ctrl.edTiming.clickClean = function() {
 		delete ctrl.edTiming.timing_id
 		delete ctrl.edTiming.e
+		delete ctrl.edTiming.periodunit
 	}
 	ctrl.edTiming.clickSaved = function(e) {
 		ctrl.edTiming.timing_id=e.doc_id
+		ctrl.edTiming.periodunit=e.periodunit
 		ctrl.edTiming.e=e
 		console.log(e, ctrl.edTiming)
 	}

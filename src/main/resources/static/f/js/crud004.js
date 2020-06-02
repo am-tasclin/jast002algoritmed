@@ -1002,15 +1002,33 @@ var initEditTiming = function(){
 
 	console.log(ctrl.edTiming)
 
+	ctrl.edTiming.clickTimeUnit = function(o) {
+		console.log(ctrl.edTiming, o)
+	}
+
+	ctrl.edTiming.clickType = function(type) {
+		ctrl.edTiming.type = type
+		console.log(ctrl.edTiming, type)
+	}
+
 	ctrl.edTiming.clickClean = function() {
 		delete ctrl.edTiming.timing_id
 		delete ctrl.edTiming.e
 		delete ctrl.edTiming.periodunit
 	}
+
 	ctrl.edTiming.clickSaved = function(e) {
-		ctrl.edTiming.timing_id=e.doc_id
-		ctrl.edTiming.periodunit=e.periodunit
 		ctrl.edTiming.e=e
+		ctrl.edTiming.timing_id		= e.doc_id
+		ctrl.edTiming.periodunit	= e.periodunit
+		ctrl.edTiming.frequency_23	= e.frequency_23
+		ctrl.edTiming.period_23		= e.period_23
+		if(ctrl.edTiming.period_23){
+			ctrl.edTiming.clickType('period')
+		}else
+		if(ctrl.edTiming.frequency_23){
+			ctrl.edTiming.clickType('frequency')
+		}
 		console.log(e, ctrl.edTiming)
 	}
 

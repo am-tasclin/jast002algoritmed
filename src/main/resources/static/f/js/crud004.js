@@ -1002,13 +1002,37 @@ var initEditTiming = function(){
 
 	console.log(ctrl.edTiming)
 
+	ctrl.edTiming.frequencySeek = function() {
+		console.log(1234)
+		ctrl.sql_exe.change_sql_seek2(function(){
+			console.log(123)
+		})
+	}
+	ctrl.edTiming.frequencyChange = function() {
+		console.log(ctrl.edTiming, ctrl.edTiming.frequency_23)
+		ctrl.edTiming.frequencySeek()
+	}
+
+	ctrl.edTiming.periodChange = function() {
+		console.log(ctrl.edTiming)
+	}
+
 	ctrl.edTiming.clickTimeUnit = function(o) {
+		ctrl.edTiming.periodunit = o.value_1_22
+		ctrl.edTiming.periodunit_id = o.doc_id
 		console.log(ctrl.edTiming, o)
 	}
 
 	ctrl.edTiming.clickType = function(type) {
 		ctrl.edTiming.type = type
 		console.log(ctrl.edTiming, type)
+		if('frequency'==type){
+			delete ctrl.edTiming.period_23
+			ctrl.edTiming.frequencySeek()
+		}else
+		if('period'==type){
+			delete ctrl.edTiming.frequency_23
+		}
 	}
 
 	ctrl.edTiming.clickClean = function() {
@@ -1055,6 +1079,27 @@ var initWiki = function(){
 
 var initSqlExe = function($timeout){
 
+	sql_app.exe = {}
+	ctrl.sql_exe = sql_app.exe
+	ctrl.sql_exe.show_sql_type='value_1_22'
+	sql_app.exe.limit = 25
+
+	var _timeout_seek_fn2
+	ctrl.sql_exe.change_sql_seek2 = function(fn){
+		if(_timeout_seek_fn2) $timeout.cancel(_timeout_seek_fn2)
+		_timeout_seek_fn2 = $timeout(fn, 1000)
+	}
+
+	var _timeout_seek_fn
+	ctrl.sql_exe.change_sql_seek = function(){
+		if(_timeout_seek_fn) $timeout.cancel(_timeout_seek_fn)
+		_timeout_seek_fn = $timeout(function() {
+			var sql_id = ctrl.sql_exe.sql_id
+			ctrl.sql_exe.sql_id = 0
+			ctrl.sql_exe.read(sql_id)
+		}, 1000)
+	}
+
 	ctrl.request.changeView = function(p){
 		if(!ctrl.request.parameters.views) ctrl.request.parameters.views = ''
 		var v = ctrl.request.parameters.views.split(',')
@@ -1071,13 +1116,8 @@ var initSqlExe = function($timeout){
 		console.log(ctrl.request.parameters.views)
 	}
 
-	sql_app.exe = {}
-	ctrl.sql_exe = sql_app.exe
-	ctrl.sql_exe.show_sql_type='value_1_22'
-	sql_app.exe.limit = 25
-
-	ctrl.sql_exe.set_sql_seek = function(itemEl){
-		var o = ctrl.eMap[ctrl.eMap[ctrl.sql_exe.sql_id].ref_to_col[371682]]
+	ctrl.sql_exe.set_sql_seek = function(itemEl, type_id){
+		var o = ctrl.eMap[ctrl.eMap[ctrl.sql_exe.sql_id].ref_to_col[type_id]]
 		console.log(itemEl, o.r2value)
 		o.r2value = itemEl.value_1_22
 		var sql_id = ctrl.sql_exe.sql_id
@@ -1091,15 +1131,6 @@ var initSqlExe = function($timeout){
 		var o = ctrl.eMap[ctrl.eMap[ctrl.sql_exe.sql_id].ref_to_col[371682]]
 	}
 
-	var _timeout_seek_fn
-	ctrl.sql_exe.change_sql_seek = function(){
-		if(_timeout_seek_fn) $timeout.cancel(_timeout_seek_fn)
-		_timeout_seek_fn = $timeout(function() {
-			var sql_id = ctrl.sql_exe.sql_id
-			ctrl.sql_exe.sql_id = 0
-			ctrl.sql_exe.read(sql_id)
-		}, 1000)
-	}
 	ctrl.sql_exe.read = function(sql_id){
 		var d = ctrl.eMap[sql_id]
 		//console.log(sql_id, d.doc_id)
@@ -1124,8 +1155,13 @@ var initSqlExe = function($timeout){
 			var fn2 = function(d2){
 				var sql2 = d2.value_1_22
 				var sql_id2 = d2.doc_id
+				console.log(d2, sql2, sql_id2)
 				if(371682==d2.reference){// seek.like_all 
-					sql2 = "'%" + d2.r2value + "%'" 
+					sql2 = "'%" + d2.r2value + "%'"
+				}else 
+				if(371820==d2.reference){//parameter_to_seek 
+					console.log(sql2)
+					sql2 = d2.r2value
 				}else{
 				}
 				ctrl.sql_exe.read_sql = ctrl.sql_exe.read_sql.replace(':sql_'+sql_id2, sql2)

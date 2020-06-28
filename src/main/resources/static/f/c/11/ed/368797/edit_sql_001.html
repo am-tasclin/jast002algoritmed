@@ -26,6 +26,7 @@
 				<span class="w3-tiny am-b"> Частота </span>
 				<div>
 					<input class="w3-border" data-ng-model="ctrl.edTiming.frequency_23"
+						data-ng-change="ctrl.edTiming.frequencyChange()"
 						style="width: 40px;" type="number"> раз. в
 				</div>
 			</div>
@@ -35,6 +36,7 @@
 				<span class="w3-tiny am-b"> Період </span>
 				<div>
 					кожні <input class="w3-border"
+						data-ng-change="ctrl.edTiming.periodChange()"
 						data-ng-model="ctrl.edTiming.period_23" style="width: 40px;"
 						type="number">
 				</div>
